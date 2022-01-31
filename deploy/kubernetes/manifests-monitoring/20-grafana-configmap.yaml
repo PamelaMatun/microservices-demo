@@ -5318,7 +5318,7 @@ data:
         "version": 56
       }
     }
-    sock-shop-performance-dashboard.json: |
+  sock-shop-pamela-dashboard.json: |
     {
       "__inputs": [],
       "annotations": {
@@ -7392,6 +7392,7 @@ data:
       "uid": null,
       "version": 0
     }
+
 
 kind: ConfigMap
 metadata:
