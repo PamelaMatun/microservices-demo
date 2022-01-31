@@ -26,7 +26,7 @@ def service_error_budget(datasource, serviceTitle, serviceName):
         ),
         targets=[
             Target(
-                expr='(1-(sum(increase(request_duration_seconds_count{name="%s",status_code=~"4.+|5.+"}[5h]))/sum(increase(request_duration_seconds_count{name="%s"}[5h])))/(1 - .80))*100' % (serviceName, serviceName)
+                expr='(1-(sum(increase(request_duration_seconds_count{name="%s",status_code=~"4.+|5.+"}[5h]))/sum(increase(request_duration_seconds_count{name="%s"}[5h])))/(1 - .80))*100' % (serviceName, serviceName),
                 legendFormat="error budget",
                 refId='A',
             ),
