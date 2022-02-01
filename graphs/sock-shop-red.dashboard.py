@@ -19,7 +19,7 @@ def service_qps_graph(datasource, serviceTitle, serviceName):
     title = serviceTitle + " QPS"
     expr='sum(rate(request_duration_seconds_count{name="%s",route!="metrics"}[1m])) by(status_code) * 100' % (serviceName)
     legendFormat="{{ status_code }}"
-    yformat="OPS_FORMAT"
+    yformat=OPS_FORMAT
     ylabel="QPS (1 min)"
     return singleQueryGraph(
         title,
@@ -33,7 +33,7 @@ def service_latency_graph(datasource, serviceTitle, serviceName):
     title = serviceTitle + " Latency (P99)"
     expr='histogram_quantile(0.99, sum(rate(request_duration_seconds_bucket{name="%s"}[1m])) by (name, le))' % (serviceName)
     legendFormat="99th quantile"
-    yformat="SECONDS_FORMAT"
+    yformat=SECONDS_FORMAT
     ylabel="latency"
     return singleQueryGraph(
         title,
@@ -47,7 +47,7 @@ def service_error_budget(datasource, serviceTitle, serviceName):
     title = serviceTitle + " Error Budget"
     expr='(1-(sum(increase(request_duration_seconds_count{name="%s",status_code=~"4.+|5.+"}[5h]))/sum(increase(request_duration_seconds_count{name="%s"}[5h])))/(1 - .80))*100' % (serviceName, serviceName)
     legendFormat="budget"
-    yformat="PERCENT_FORMAT"
+    yformat=PERCENT_FORMAT
     ylabel="Error Budget(5h)"
     return singleQueryGraph(
         title,
